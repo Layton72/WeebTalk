@@ -1,0 +1,29 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("/static/images/fma.jpg");
+    background-color: rgb(30, 46, 80);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+    height: 100vh;
+}
+
+#logo{
+    border-radius: 5px;
+}
+
+.transparent{
+    background-color: transparent;
+}
+
+.date{
+    color: white;
+}
+
+input, select, textarea{
+    color: white !important;
+}
+
+textarea:focus, input:focus{
+    color: black !important;
+}
