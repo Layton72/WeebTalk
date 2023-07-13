@@ -121,3 +121,19 @@ def delete_review(review_id):
     data = {"id": review_id}
     Reviews.delete(data)
     return redirect(f'/weebtalk/my_reviews/{session["logged_in"]}')
+
+@app.route('/weebtalk/user_reviews/<int:user_id>')
+def user_reviews(user_id):
+    if "logged_in" not in session:
+        return redirect ('/weebtalk/login')
+    
+    user = Users.get_one_by_id(session["logged_in"])
+    user_reviews = Users.get_one_by_id(user_id)
+    reviews = Reviews.get_all_reviews_by_user_id(user_id)
+
+    for review in reviews:
+            upvotes = Likes.get_all_upvotes(review.id)
+            for upvote in upvotes:
+                review.total_upvotes += upvote.upvotes
+
+    return render_template('user_reviews.html', user=user, reviews=reviews, user_reviews=user_reviews)

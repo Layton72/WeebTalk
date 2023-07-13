@@ -20,7 +20,7 @@
                 </a>
             </div>
             <form class="d-flex" role="search" method="post" action="/search/process">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <input class="form-control me-2" type="search" placeholder="Search Anime" aria-label="Search" name="search">
                 <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             <div>
@@ -46,6 +46,7 @@
                         <th scope="col">Review</th>
                         <th scope="col">Score</th>
                         <th scope="col">User</th>
+                        <th scope="col">Date</th>
                         <th scope="col">UpDoots</th>
                     </tr>
                 </thead>
@@ -60,7 +61,14 @@
                             </th>
                             <td class="text-white align-middle">{{review.review}}</td>
                             <td class="text-white align-middle">{{review.score}}</td>
-                            <td class="text-white align-middle">{{review.username}}</td>
+                            <td class="text-white align-middle">
+                                <a href="/weebtalk/user_reviews/{{review.user_id}}" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-75-hover text-white">
+                                    {{review.username}}
+                                </a>
+                            </td>
+                            <td class="text-white align-middle">
+                                {{review.created_at}}
+                            </td>
                             <td class="text-white align-middle">
                                 <div class="d-flex flex-column align-items-center">
                                     <a href="/weebtalk/like/dashboard/{{review.id}}">

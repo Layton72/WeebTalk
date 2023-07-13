@@ -29,54 +29,51 @@
                 |
                 <a class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-75-hover text-white" href="/weebtalk/my_reviews/{{user.id}}">My Reviews</a>
                 |
-                <a class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-75-hover text-white" href="/weebtalk/logout">Logout</a>            </div>
+                <a class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-75-hover text-white" href="/weebtalk/logout">Logout</a>
+            </div>
         </div>
     </nav>
     </nav>
     <main class="d-flex justify-content-center">
         <div class="w-75">
             <div class="border-bottom mt-4 text-white">
-                <h1>{{ anime['alternative_titles']['en'] }}</h1>
+                <h1>{{user_reviews.username}}'s Reviews</h1>
             </div>
-            <div class="text-white mt-4">
-                <div class="d-flex align-items-center gap-4">
-                    <img src="{{ anime['main_picture']['large'] }}" alt="thumbnail" class="img-thumbnail" height="318" width="225">
-                    <div>
-                        <h3>{{ anime['title'] }}</h3>
-                        <h4>User Score: {{average_score}}/10</h4>
-                    </div>
-                </div>
-                <p class="mt-4 w-75">Synopsis:</p>
-                <p class="w-75">{{ anime['synopsis'] }}</p>
-            </div>
-            <div class="mt-5 text-white w-75">
-                <div class="d-flex justify-content-between align-items-center border-bottom">
-                    <h4>User Reviews</h4>
-                    <div class="d-flex justify-content-center">
-                        <a href="/anime_details/{{ anime[ 'id' ]}}/add_review">
-                            <button type="submit" class="btn btn-outline-light mb-3">Add Review</button>
-                        </a>
-                    </div>
-                </div>
-                {% for review in reviews %}
-                    <div class="border-bottom mt-2 d-flex justify-content-between">
-                        <div>
-                            <h5>{{review.username}}</h5>
-                            <p>Score: {{review.score}}/10</p>
-                            <p>{{review.review}}</p>
-                        </div>
-                        <div class="d-flex flex-column align-items-center">
-                            <a href="/weebtalk/like/{{review.id}}/{{anime['id']}}">
-                                <button type="submit" class="btn btn-outline-light mb-3">↑</button>
-                            </a>
-                            <p>{{review.total_upvotes}}</p>
-                            <a href="/weebtalk/dislike/{{review.id}}/{{anime['id']}}">
-                                <button type="submit" class="btn btn-outline-light mb-3">↓</button>
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            <table class="table text-white text-wrap">
+                <thead>
+                    <tr>
+                        <th scope="col">Anime</th>
+                        <th scope="col">Review</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">UpDoots</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for review in reviews %}
+                        <tr>
+                            <th>
+                                <a href="/anime_details/{{ review.mal_id }}" class="link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-75-hover text-white">
+                                    <img src="{{review.thumbnail}}" alt="thumbnail" class="img-thumbnail" height="318" width="225">
+                                    <p>{{review.title}}</p>
+                                </a>
+                            </th>
+                            <td class="text-white align-middle">{{review.review}}</td>
+                            <td class="text-white align-middle">{{review.score}}</td>
+                            <td class="text-white align-middle">
+                                <div class="d-flex flex-column align-items-center">
+                                    <a href="/weebtalk/like/user_reviews/{{review.id}}/{{review.user_id}}">
+                                        <button type="submit" class="btn btn-outline-light mb-3">↑</button>
+                                    </a>
+                                    <p>{{review.total_upvotes}}</p>
+                                    <a href="/weebtalk/dislike/user_reviews/{{review.id}}/{{review.user_id}}">
+                                        <button type="submit" class="btn btn-outline-light mb-3">↓</button>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
