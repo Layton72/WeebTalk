@@ -23,7 +23,7 @@ def searchAnime():
     search_string = session['search_string']
 
     if search_string == "":
-        return redirect('/test-dash')
+        return redirect('/weebtalk')
     
     url = f'https://api.myanimelist.net/v2/anime?q={search_string}&limit=3'
 
